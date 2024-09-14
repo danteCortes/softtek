@@ -1,15 +1,21 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Header from './components/Header';
+import { Footer } from './components/Footer';
 import './styles/app.scss';
 
 function App() {
-  const [count, setCount] = useState(0)
+	const [user, setUser] = useState('');
 
-  return (
-    <>
-      <Header></Header>
-    </>
-  )
+	useEffect(() => {
+		
+	}, []);
+
+	return (
+		<>
+			<Header></Header>
+			<Footer />
+		</>
+	)
 }
 
 export default App

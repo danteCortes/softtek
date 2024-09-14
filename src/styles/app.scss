@@ -1,7 +1,11 @@
 @use './header';
+@use './footer';
 
-body{
+body, #root{
     background-color: #F8F9FF;
     margin: 0px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
     
