@@ -9,7 +9,7 @@ $color-checkbox: #0A051E;
     right: 0px;
     top: -75px;
     z-index: -1;
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
         display: none;
     }
 }
@@ -19,7 +19,7 @@ $color-checkbox: #0A051E;
     left: 0px;
     bottom: 0px;
     z-index: -1;
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
         display: none;
     }
 }
@@ -27,20 +27,22 @@ $color-checkbox: #0A051E;
 .blur-desktop-right {
     position: absolute;
     right: 0px;
+    bottom: 0px;
     display: none;
     z-index: -1;
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
         display: block;
+        top: 0px;
     }
 }
 
 .blur-desktop-left {
     position: absolute;
     left: 0px;
-    bottom: 106px;
+    bottom: 0px;
     display: none;
     z-index: -1;
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
         display: block;
     }
 }
@@ -48,8 +50,8 @@ $color-checkbox: #0A051E;
 #flexible-health-body {
 
     padding: 0px 24px;
-    max-width: 1200px;
-    margin: 0 auto;
+    height: 100%;
+    margin: 0px;
     position: relative;
     z-index: 1;
 
@@ -73,6 +75,10 @@ $color-checkbox: #0A051E;
 
         .align-center {
             align-items: center;
+
+            @media (min-width: 992px) {
+                align-items: flex-start;
+            }
         }
     }
 
@@ -80,10 +86,41 @@ $color-checkbox: #0A051E;
         margin: 24px 0px;
         border: 0;
         border-top: 1px solid #{$color-hr};
+        @media (min-width: 992px) {
+            display: none;
+        }
     }
 
     #img-flexible-health {
         width: 136px;
+        @media (min-width: 768px) {
+            width: 50%;
+        }
+        @media (min-width: 992px) {
+            width: 480px;
+            left: 0px;
+            margin-bottom: 112px;
+        }
+    }
+
+    .title-flexible-health {
+        @media (min-width: 768px) {
+            width: 50%;
+        }
+        @media (min-width: 992px) {
+            position: absolute;
+            left: 658px;
+            width: 352px;
+        }
+    }
+
+    .form-quotation {
+        @media (min-width: 992px) {
+            width: 352px;
+            position: absolute;
+            left: 658px;
+            top: 132px;
+        }
     }
 
     .tag-promo {
@@ -106,6 +143,16 @@ $color-checkbox: #0A051E;
         line-height: 36px;
         color: #{$color-h1};
         margin: 0px;
+
+        @media (min-width: 768px) {
+            font-size: 30px;
+            line-height: 38px;
+        }
+
+        @media (min-width: 992px) {
+            font-size: 32px;
+            line-height: 40px;
+        }
     }
 
     .mb-16 {
@@ -164,7 +211,13 @@ $color-checkbox: #0A051E;
         font-size: 18px;
     }
 
-    @media (min-width: 768px) {
-        padding: 32px 120px;
+    @media (min-width: 992px) {
+        width: 992px;
+    }
+}
+
+#root {
+    @media (min-width: 992px) {
+        align-items: center;
     }
 }

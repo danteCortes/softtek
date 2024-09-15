@@ -7,8 +7,9 @@
 body, #root{
     background-color: #F8F9FF;
     margin: 0px;
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
+    z-index: 0;
 }
