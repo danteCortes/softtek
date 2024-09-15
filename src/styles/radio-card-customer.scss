@@ -1,0 +1,42 @@
+.card-radio-customer {
+    box-shadow: 0px 1px 32px 0px #AEACF359;
+    border-radius: 24px;
+    padding: 40px 24px;
+    margin-bottom: 24px;
+    position: relative;
+    .radio-button {
+        position: absolute;
+        top: 16px;
+        right: 24px;
+        input[type="radio"] {
+            width: 24px;
+            height: 24px;
+        }
+    }
+    .customer-type {
+        .title-customer-type {
+            display: flex;
+            align-items: center;
+            img.image-customer-type {
+                width: 32px;
+                height: 32px;
+                margin-right: 8px;
+            }
+            h2 {
+                font-size: 20px;
+                font-weight: 900;
+                line-height: 28px;
+                letter-spacing: -0.2px;
+            }
+        }
+        .description-customer-type {
+            p {
+                font-size: 12px;
+                font-weight: 400;
+                line-height: 20px;
+                letter-spacing: 0.2px;
+                margin: 0px;
+            }
+        }
+    }
+}

@@ -28,6 +28,7 @@
       "@pages/*": ["src/pages/*"],
       "@styles/*": ["src/styles/*"],
       "@store/*": ["src/store/*"],
+      "@constants/*": ["src/constants/*"],
     }
   },
   "include": ["src"]
