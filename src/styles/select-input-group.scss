@@ -1,0 +1,54 @@
+.input-group {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 56px;
+}
+  
+select {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px 0 0 8px;
+    background-color: #fff;
+    height: 100%;
+    font-size: 24px;
+    max-width: 140px;
+}
+  
+.input-wrapper {
+    flex: 2;
+    position: relative;
+    height: 100%;
+}
+  
+.input-group .input-wrapper input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 0 8px 8px 0;
+    box-sizing: border-box;
+    height: 100%;
+    font-size: 16px;
+}
+  
+.floating-label {
+    position: absolute;
+    left: 10px;
+    color: #999;
+    transition: 0.2s ease all;
+    pointer-events: none;
+    display: none;
+}
+  
+input:focus + .floating-label,
+input:not(:placeholder-shown) + .floating-label {
+    top: 5px;
+    left: 10px;
+    font-size: 12px;
+    display: block;
+}
+
+input:focus::placeholder {
+    color: transparent;
+}

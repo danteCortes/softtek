@@ -1,5 +1,5 @@
-import LogoFooterMobile from '../assets/LogoFooterMobile.png';
-import LogoFooterDesktop from '../assets/LogoFooterDesktop.png';
+import LogoFooterMobile from '@assets/LogoFooterMobile.png';
+import LogoFooterDesktop from '@assets/LogoFooterDesktop.png';
 
 export function Footer(){
     return (

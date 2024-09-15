@@ -1,5 +1,5 @@
-import LogoHeader from '../assets/LogoHeader.png';
-import PhoneIcon from '../assets/PhoneIcon.png';
+import LogoHeader from '@assets/LogoHeader.png';
+import PhoneIcon from '@assets/PhoneIcon.png';
 
 export function Header(){
     return (

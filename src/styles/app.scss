@@ -1,5 +1,6 @@
 @use './header';
 @use './footer';
+@use './flexible-health';
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
@@ -10,40 +11,4 @@ body, #root{
     display: flex;
     flex-direction: column;
     font-family: 'Roboto', sans-serif;
-}
-
-.blur-mobile-sup {
-    position: absolute;
-    right: 0px;
-    @media (min-width: 768px) {
-        display: none;
-    }
-}
-
-.blur-mobile-inf {
-    position: absolute;
-    left: 0px;
-    bottom: 156px;
-    @media (min-width: 768px) {
-        display: none;
-    }
-}
-
-.blur-desktop-right {
-    position: absolute;
-    right: 0px;
-    display: none;
-    @media (min-width: 768px) {
-        display: block;
-    }
-}
-
-.blur-desktop-left {
-    position: absolute;
-    left: 0px;
-    bottom: 106px;
-    display: none;
-    @media (min-width: 768px) {
-        display: block;
-    }
 }
