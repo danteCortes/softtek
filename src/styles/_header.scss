@@ -1,9 +1,10 @@
 $color-phone-number: '#03050F';
 
 header{
-    padding: 12px 24px;
+    padding: 0px 24px;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+    width: 100%;
     img {
         height: 32px;
     }
@@ -31,6 +32,6 @@ header{
         }
     }
     @media (min-width: 768px) {
-        padding: 2px 120px;
+        padding: 12px 0px;
     }
 }

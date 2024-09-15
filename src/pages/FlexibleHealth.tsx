@@ -1,6 +1,12 @@
-import FlexibleHealthImage from '@assets/FlexibleHealthImage.png';
+import { ChangeEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@store/userSlice';
+import { AppDispatch } from '@store/index';
+
 import { SelectInputGroup } from '@components/elements/SelectInputGroup';
 import { InputText } from '@components/elements/InputText';
+import FlexibleHealthImage from '@assets/FlexibleHealthImage.png';
 import BlurMobileSup from '@assets/BlurMobileSup.png';
 import BlurMobileInf from '@assets/BlurMobileInf.png';
 import BlurDesktopRight from '@assets/BlurDesktopRight.png';
@@ -12,7 +18,106 @@ const options: { value: string; option: string; }[] = [
     {value: "3", option: "Carné de Ext."},
 ]
 
-export function FlexibleHealth () {
+interface IErrors {
+    document_type?: string;
+    document_number?: string;
+    cellphone?: string;
+    chb_privacy?: string;
+    chb_commercial_communications?: string;
+}
+
+export const FlexibleHealth = () => {
+
+    const navigate = useNavigate();
+
+    const dispatch: AppDispatch = useDispatch();
+
+    const [form, setForm] = useState({
+        document_type: '1',
+        document_number: '',
+        cellphone: '',
+        chb_privacy: false,
+        chb_commercial_communications: false
+    });
+
+    const [errors, setErrors] = useState<IErrors>({
+        document_type: '',
+        document_number: '',
+        cellphone: '',
+        chb_privacy: '',
+        chb_commercial_communications: ''
+    })
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        if(/^[0-9]*$/.test(value)){
+            setForm({
+                ...form,
+                [name]: value
+            });
+        }
+    }
+
+    const handleChangeSelect = (e: ChangeEvent<HTMLSelectElement>) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value
+        });
+    }
+
+    const handleChangeCheckbox = (e: ChangeEvent<HTMLInputElement>) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.checked
+        });
+    }
+
+    const validate = (): IErrors => {
+        setErrors({});
+        const currentErrors: IErrors = {};
+        console.log('evaluamos')
+        
+        if(form.document_number === ""){
+            currentErrors.document_number = "El Nro. de documento es un campo obligatorio.";
+        }
+        if(form.cellphone === ""){
+            currentErrors.cellphone = "El celular es un campo obligatorio.";
+        }else if(form.cellphone.length != 9){
+            currentErrors.cellphone = "En celular debe tener 9 números.";
+        }
+        if(!form.chb_privacy){
+            currentErrors.chb_privacy = "Debe aceptar la Política de Privacidad.";
+        }
+        if(!form.chb_commercial_communications){
+            currentErrors.chb_commercial_communications = "Debe aceptar la Política Comunicaciones Comerciales";
+        }
+        return currentErrors;
+    }
+
+    const searchCustomer = async () => {
+        const btnHandleQuotation = document.getElementById("btnHandleQuotation") as HTMLButtonElement;
+        btnHandleQuotation.disabled = true;
+        try {
+            const validationErrors = validate();
+            if (Object.keys(validationErrors).length > 0) {
+                setErrors(validationErrors);
+                btnHandleQuotation.disabled = false;
+            } else {
+                const response = await fetch("https://rimac-front-end-challenge.netlify.app/api/user.json");
+                if(!response.ok)
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+    
+                const data = await response.json();
+                dispatch(setUser(data));
+                navigate("/plans");
+                btnHandleQuotation.disabled = false;
+            }
+        } catch (error) {
+            btnHandleQuotation.disabled = false;
+            console.error(error);
+        }
+    }
+
     return (
         <>
             <img className='blur-desktop-right' src={BlurDesktopRight} alt="" />
@@ -38,26 +143,38 @@ export function FlexibleHealth () {
                     </div>
                     <div className="row mb-16">
                         <div className="col-1">
-                            <SelectInputGroup placeholder="Nro. de documento" options={options} />
+                            <SelectInputGroup placeholder="Nro. de documento" options={options} valueSelect={form.document_type} valueInput={form.document_number}
+                                nameSelect='document_type' nameInput='document_number' changeValueInput={handleChange} changeValueSelect={handleChangeSelect}
+                                error={errors.document_number}  />
                         </div>
                     </div>
                     <div className="row mb-24">
                         <div className="col-1">
-                            <InputText placeholder='Celular' />
+                            <InputText placeholder='Celular' name="cellphone" value={form.cellphone} changeValue={handleChange} error={errors.cellphone} />
                         </div>
                     </div>
                     <div className="row mb-16">
                         <div className="col-1">
                             <div className="checkbox">
-                                <input type="checkbox" name="" id="" /> Acepto la Política de Privacidad
+                                <input type="checkbox" name="chb_privacy" onChange={handleChangeCheckbox} /> Acepto la Política de Privacidad
                             </div>
+                            {
+                                errors.chb_privacy && (
+                                    <div className="errors"><span>{errors.chb_privacy}</span></div>
+                                )
+                            }
                         </div>
                     </div>
                     <div className="row mb-16">
                         <div className="col-1">
                             <div className="checkbox">
-                                <input type="checkbox" name="" id="" /> Acepto la Política Comunicaciones Comerciales
+                                <input type="checkbox" name="chb_commercial_communications" onChange={handleChangeCheckbox} /> Acepto la Política Comunicaciones Comerciales
                             </div>
+                            {
+                                errors.chb_commercial_communications && (
+                                    <div className="errors"><span>{errors.chb_commercial_communications}</span></div>
+                                )
+                            }
                         </div>
                     </div>
                     <div className="row mb-32">
@@ -67,7 +184,7 @@ export function FlexibleHealth () {
                     </div>
                     <div className="row mb-84">
                         <div className="col-1 text-center">
-                            <button className="btn-black">Cotiza aquí</button>
+                            <button id="btnHandleQuotation" className="btn-black" onClick={searchCustomer} >Cotiza aquí</button>
                         </div>
                     </div>
                 </div>
