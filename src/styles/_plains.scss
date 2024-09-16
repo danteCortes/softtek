@@ -160,10 +160,18 @@ $color-summary: #7981B2;
         width: 100%;
         overflow: hidden;
         .plans-list {
-            margin-left: calc((100% - 368px) / 2);
             display: flex;
             transition: transform 0.3s ease-in-out;
             gap: 16px;
+            @media (max-width: 991.98px) {
+                margin-left: calc((100% - 368px) / 2);
+            }
+            @media (min-width: 992px) {
+                flex-wrap: wrap;
+                width: 1200px;
+                margin: 0 auto;
+                justify-content: center;
+            }
         }
         .paginator {
             display: flex;
@@ -171,6 +179,9 @@ $color-summary: #7981B2;
             gap: 1rem;
             margin-bottom: 3rem;
             justify-content: center;
+            @media (min-width: 992px) {
+                display: none;
+            }
             .left-page, .right-page {
                 width: 32px;
                 height: 32px;

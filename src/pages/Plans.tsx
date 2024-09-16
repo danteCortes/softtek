@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import CircleLeft from '@assets/CircleLeft.png';
@@ -11,12 +11,20 @@ import { CardPlan } from '@components/elements/CardPlan';
 import { customerTypes } from '@constants/customer-type';
 
 import { setUser } from '@store/userSlice';
-import { setList } from '@store/planSlice';
+import { setList, setPlan } from '@store/planSlice';
 import { RootState } from '@store/index';
+
+interface IPlan {
+    age: number;
+    description: string[];
+    name: string;
+    price: number;
+}
 
 export function Plans() {
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const user = useSelector((state: RootState) => state.user);
     const plan = useSelector((state: RootState) => state.plan);
@@ -80,6 +88,11 @@ export function Plans() {
 
             dispatch(setList(data.list));
         }
+    }
+
+    const handleChoosePlan = async (plan: IPlan) => {
+        dispatch(setPlan(plan));
+        navigate("/summary")
     }
 
     useEffect(() => {
@@ -153,7 +166,8 @@ export function Plans() {
                 <div id='plans-list' className="plans-list" ref={containerRef} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} >
                     {
                         plan.list && plan.list.length > 0 && plan.list.map(currentPlan => (
-                            <CardPlan plan={currentPlan} index={plan.list.indexOf(currentPlan) + 1} key={plan.list.indexOf(currentPlan) + 1} />
+                            <CardPlan plan={currentPlan} index={plan.list.indexOf(currentPlan) + 1} key={plan.list.indexOf(currentPlan) + 1}
+                                handleChoosePlan={handleChoosePlan} />
                         ))
                     }
                 </div>

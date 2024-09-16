@@ -9,7 +9,7 @@ interface IUserState {
 const initialState: IUserState = {
     name: '',
     lastName: '',
-    birthDay: ''
+    birthDay: '',
 }
 
 const userSlice = createSlice({

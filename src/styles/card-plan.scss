@@ -7,6 +7,10 @@ $bg-btn-card-plan: #FF1C44;
     border-radius: 1.5rem;
     padding: 2.5rem 2rem;
     margin: 1.5rem 0.5rem;
+    @media (min-width: 992px) {
+        flex: 0 1 calc(33% - 32px);
+        box-sizing: border-box;
+    }
     .card-plan-header {
         width: 100%;
         .card-plan-title {
@@ -79,5 +83,6 @@ $bg-btn-card-plan: #FF1C44;
         line-height: 20px;
         letter-spacing: 0.4px;
         color: #FFF;
+        cursor: pointer;
     }
 }

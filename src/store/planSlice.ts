@@ -7,8 +7,14 @@ interface IPlan {
     price: number;
 }
 
-const initialState: {list: IPlan[]} = {
-    list: []
+const initialState: {list: IPlan[], plan: IPlan} = {
+    list: [],
+    plan: {
+        age: 0,
+        description: [],
+        name: '',
+        price: 0
+    }
 }
 
 const planSlice = createSlice({
@@ -18,9 +24,13 @@ const planSlice = createSlice({
         setList: (state, action: PayloadAction<IPlan[]>) =>
         {
             state.list = action.payload;
+        },
+        setPlan: (state, action: PayloadAction<IPlan>) =>
+        {
+            state.plan = action.payload;
         }
     }
 });
 
-export const { setList } = planSlice.actions;
+export const { setList, setPlan } = planSlice.actions;
 export default planSlice.reducer;

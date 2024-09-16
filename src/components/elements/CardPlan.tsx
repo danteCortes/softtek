@@ -16,11 +16,12 @@ interface IPlan {
 interface ICardPlanProps {
     plan: IPlan;
     index: number;
+    handleChoosePlan: (plan: IPlan) => void
 }
 
 export function CardPlan(props: ICardPlanProps)
 {
-    const { plan, index } = props;
+    const { plan, index, handleChoosePlan } = props;
 
     return (
         <div className="card-plan">
@@ -61,7 +62,7 @@ export function CardPlan(props: ICardPlanProps)
                     ))
                 }
             </div>
-            <button className="btn-card-plan">Seleccionar Plan</button>
+            <button className="btn-card-plan" onClick={() => handleChoosePlan(plan)} >Seleccionar Plan</button>
         </div>
     )
 }
