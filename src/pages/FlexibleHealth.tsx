@@ -33,7 +33,7 @@ export const FlexibleHealth = () => {
     const dispatch: AppDispatch = useDispatch();
 
     const [form, setForm] = useState({
-        document_type: '1',
+        document_type: 'DNI',
         document_number: '',
         cellphone: '',
         chb_privacy: false,
@@ -107,7 +107,12 @@ export const FlexibleHealth = () => {
                     throw new Error(`HTTP error! Status: ${response.status}`);
     
                 const data = await response.json();
-                dispatch(setUser(data));
+                dispatch(setUser({
+                    ...data,
+                    document_number: form.document_number,
+                    document_type: form.document_type,
+                    cellphone: form.cellphone
+                }));
                 navigate("/plans");
                 btnHandleQuotation.disabled = false;
             }

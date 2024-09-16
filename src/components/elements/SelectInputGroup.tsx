@@ -23,7 +23,7 @@ export function SelectInputGroup (props: ISelectInputGroupProps) {
                 <select id="my-select" required name={nameSelect} value={valueSelect} onChange={changeValueSelect}>
                     {
                         options.length > 0 && options.map((option) => (
-                            <option value={option.value} key={option.value}>{option.option}</option>
+                            <option value={option.option} key={option.value}>{option.option}</option>
                         ))
                     }
                 </select>

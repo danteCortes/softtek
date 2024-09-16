@@ -110,6 +110,10 @@ export function Plans() {
         handleChooseCustomer();
     }, [customerType.customer_type]);
 
+    useEffect(() => {
+        dispatch(setList([]));
+    }, [])
+
     return (
         <div id="plans">
             <div className="steps-mobile">
