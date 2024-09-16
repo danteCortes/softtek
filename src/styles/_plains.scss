@@ -1,15 +1,20 @@
 $progress-bar-pointer: #4F4FFF;
 $progress-bar-bg: #D7DBF5;
+$steps-desktop-bg: #EDEFFC;
 $color: #141938;
+$color-summary: #7981B2;
 
 #plans {
     width: 100%;
-    .steps {
+    .steps-mobile {
         height: 56px;
         display: flex;
         align-items: center;
         justify-content: space-between;
         padding: 0px 24px;
+        @media (min-width: 992px) {
+            display: none;
+        }
         .circle-left-button {
             a {
                 .circle-left-image {
@@ -41,8 +46,46 @@ $color: #141938;
     }
     .steps-body {
         margin: 32px 24px auto 24px;
+        .return-step {
+            display: none;
+            @media (min-width: 992px) {
+                display: block;
+                height: 116px;
+                .return-step-content {
+                    display: flex;
+                    align-items: center;
+                    gap: 8px;
+                    width: 928px;
+                    height: 100%;
+                    margin: 0 auto;
+                    text-decoration: none;
+                    .icon-back {
+                        display: block;
+                        border: 2px solid #{$progress-bar-pointer};
+                        border-radius: 50%;
+                        width: 20px;
+                        height: 20px;
+                        color: #{$progress-bar-pointer};
+                        text-align: center;
+                    }
+                    p {
+                        font-size: 18px;
+                        font-weight: 700;
+                        line-height: 20px;
+                        letter-spacing: 0.4px;
+                        color: #{$progress-bar-pointer};
+                    }
+                }
+            }
+        }
         .customer-quotation {
             margin-bottom: 36px;
+            color: #{$color};
+            @media (min-width: 992px) {
+                width: 544px;
+                margin: 0 auto;
+                text-align: center;
+            }
             .title-quotation {
                 h1 {
                     font-size: 28px;
@@ -50,6 +93,12 @@ $color: #141938;
                     line-height: 36px;
                     letter-spacing: -0.2px;
                     margin-bottom: 8px;
+                    @media (min-width: 992px) {
+                        font-size: 40px;
+                        font-weight: 700;
+                        line-height: 48px;
+                        letter-spacing: -0.6px;
+                    }
                 }
             }
             .instruction-quotation {
@@ -63,6 +112,48 @@ $color: #141938;
         }
         .select-customer-type {
             gap: 40px;
+            @media (min-width: 992px) {
+                width: 544px;
+                margin: 0 auto;
+                display: flex;
+                flex: 0 0 50%;
+            }
+        }
+    }
+    .steps-desktop {
+        display: none;
+        @media (min-width: 992px) {
+            display: block;
+            background-color: #{$steps-desktop-bg};
+            padding: 16px 0px;
+            .steps-description {
+                display: flex;
+                width: 368px;
+                height: 24px;
+                margin: 0 auto;
+                p.plans-coverage {
+                    margin: 0px 16px;
+                    font-size: 16px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    letter-spacing: 0.2px;
+                    color: #{$color};
+                }
+                hr {
+                    margin-right: 16px;
+                    border: none;
+                    border-top: 2px dashed #{$progress-bar-pointer};
+                    width: 32px;
+                }
+                p.summary {
+                    margin: 0px 0px 0px 16px;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 24px;
+                    letter-spacing: 0.2px;
+                    color: #{$color-summary};
+                }
+            }
         }
     }
 }
