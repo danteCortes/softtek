@@ -156,4 +156,33 @@ $color-summary: #7981B2;
             }
         }
     }
+    .plans-body {
+        width: 100%;
+        overflow: hidden;
+        .plans-list {
+            margin-left: calc((100% - 368px) / 2);
+            display: flex;
+            transition: transform 0.3s ease-in-out;
+            gap: 16px;
+        }
+        .paginator {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+            .left-page, .right-page {
+                width: 32px;
+                height: 32px;
+                border: 2px solid #{$progress-bar-pointer};
+                border-radius: 50%;
+                align-items: center;
+                display: flex;
+                justify-content: center;
+                color: #{$progress-bar-pointer};
+                cursor: pointer;
+                font-weight: 700;
+            }
+        }
+    }
 }

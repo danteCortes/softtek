@@ -75,7 +75,6 @@ export const FlexibleHealth = () => {
     const validate = (): IErrors => {
         setErrors({});
         const currentErrors: IErrors = {};
-        console.log('evaluamos')
         
         if(form.document_number === ""){
             currentErrors.document_number = "El Nro. de documento es un campo obligatorio.";

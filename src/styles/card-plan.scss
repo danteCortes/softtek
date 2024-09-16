@@ -1,0 +1,83 @@
+$color-title-price: #7981B2;
+$bg-btn-card-plan: #FF1C44;
+
+.card-plan {
+    min-width: 18rem;
+    box-shadow: 0px 1px 32px 0px #AEACF359;
+    border-radius: 1.5rem;
+    padding: 2.5rem 2rem;
+    margin: 1.5rem 0.5rem;
+    .card-plan-header {
+        width: 100%;
+        .card-plan-title {
+            display: flex;
+            align-items: center;
+            align-content: space-around;
+            width: 100%;
+            h2.card-plan-name {
+                font-size: 24px;
+                font-weight: 900;
+                line-height: 32px;
+                letter-spacing: -0.2px;
+                margin: 0px;
+            }
+            img.card-plan-image {
+                width: 56px;
+                height: 56px;
+                margin-left: auto;
+            }
+        }
+        .card-plan-price {
+            p.title-price {
+                font-size: 12px;
+                font-weight: 900;
+                line-height: 16px;
+                letter-spacing: 0.6px;
+                color: #{$color-title-price};
+                margin: 0px;
+            }
+            h2.plan-price {
+                font-size: 20px;
+                font-weight: 900;
+                line-height: 28px;
+                letter-spacing: -0.2px;
+                margin: 0px;
+            }
+        }
+    }
+    hr {
+        margin: 1.5rem 0rem;
+    }
+    .card-plan-description {
+        margin-bottom: 2.5rem;
+        .item-description {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.25rem;
+            img {
+                width: 20px;
+                height: 20px;
+                margin-top: 0.25rem;
+            }
+            p {
+                margin-top: 0rem;
+                font-size: 16px;
+                font-weight: 400;
+                line-height: 28px;
+                letter-spacing: 0.1px;
+            }
+        }
+    }
+    .btn-card-plan {
+        background-color: #{$bg-btn-card-plan};
+        border-radius: 2rem;
+        padding: 0.875rem 2rem;
+        width: 100%;
+        border: none;
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 20px;
+        letter-spacing: 0.4px;
+        color: #FFF;
+    }
+}

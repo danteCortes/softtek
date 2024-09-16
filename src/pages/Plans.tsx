@@ -1,11 +1,17 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
 import CircleLeft from '@assets/CircleLeft.png';
+
 import { RadioCardCustomer } from '@components/elements/RadioCardCustomer';
 import { NumberCircle } from '@components/elements/NumberCircle';
+import { CardPlan } from '@components/elements/CardPlan';
+
 import { customerTypes } from '@constants/customer-type';
-import { useSelector, useDispatch } from 'react-redux';
+
 import { setUser } from '@store/userSlice';
+import { setList } from '@store/planSlice';
 import { RootState } from '@store/index';
 
 export function Plans() {
@@ -13,8 +19,38 @@ export function Plans() {
     const dispatch = useDispatch();
 
     const user = useSelector((state: RootState) => state.user);
+    const plan = useSelector((state: RootState) => state.plan);
 
-    const [customerType, setCustomerType] = useState<{customerType: string; planType: string;}>({customerType: '', planType: ''});
+    const [customerType, setCustomerType] = useState<{customer_type: string; plan_type: string;}>({customer_type: '', plan_type: ''});
+    const [page, setPage] = useState<number>(0);
+
+    const containerRef = useRef<HTMLDivElement>(null);
+    const startTouchX = useRef<number>(0);
+
+    const handleTouchStart = (e: React.TouchEvent) => {
+        startTouchX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: React.TouchEvent) => {
+        const endTouchX = e.touches[0].clientX;
+        if (startTouchX.current - endTouchX > 50) {
+            nextSlide();
+        } else if (startTouchX.current - endTouchX < -50) {
+            prevSlide();
+        }
+    };
+
+    const nextSlide = () => {
+        setPage((prevIndex) =>
+            prevIndex === plan.list.length - 1 ? 0 : prevIndex + 1
+        );
+    };
+
+    const prevSlide = () => {
+        setPage((prevIndex) =>
+            prevIndex === 0 ? plan.list.length - 1 : prevIndex - 1
+        );
+    };
 
     const checkUser = async () => {
         if(user.name === ""){
@@ -37,9 +73,29 @@ export function Plans() {
         });
     }
 
+    const handleChooseCustomer = async () => {
+        if(customerType.customer_type){
+            const response = await fetch("https://rimac-front-end-challenge.netlify.app/api/plans.json");
+            const data = await response.json();
+
+            dispatch(setList(data.list));
+        }
+    }
+
+    useEffect(() => {
+        if(containerRef.current){
+            const plansList = document.getElementById('plans-list') as HTMLDivElement;
+            plansList.style.transform = `translateX(-${page * 386}px)`;
+        }
+    }, [page]);
+
     useEffect(() => {
         checkUser();
-    }, [user, dispatch])
+    }, [user, dispatch]);
+
+    useEffect(() => {
+        handleChooseCustomer();
+    }, [customerType.customer_type]);
 
     return (
         <div id="plans">
@@ -92,6 +148,24 @@ export function Plans() {
                         ))
                     }
                 </div>
+            </div>
+            <div className="plans-body">
+                <div id='plans-list' className="plans-list" ref={containerRef} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} >
+                    {
+                        plan.list && plan.list.length > 0 && plan.list.map(currentPlan => (
+                            <CardPlan plan={currentPlan} index={plan.list.indexOf(currentPlan) + 1} key={plan.list.indexOf(currentPlan) + 1} />
+                        ))
+                    }
+                </div>
+                {
+                    plan.list.length > 0 && (
+                        <div className="paginator">
+                            <div className="left-page" onClick={prevSlide}><span>&lt;</span></div>
+                            <span className="number-page">{page + 1} / {plan.list.length}</span>
+                            <div className="right-page" onClick={nextSlide}><span>&gt;</span></div>
+                        </div>
+                    )
+                }
             </div>
         </div>
     )
